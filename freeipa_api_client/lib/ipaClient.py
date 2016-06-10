@@ -2,8 +2,8 @@ import json
 import requests
 import datetime
 import pytz
-from ipaAuth import IPAAuth
-from ipaResponse import IPAResponse
+from .ipaAuth import IPAAuth
+from .ipaResponse import IPAResponse
 from dateutil.parser import parse
 
 
