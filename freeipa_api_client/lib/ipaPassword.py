@@ -1,4 +1,7 @@
-import urllib
+try:
+    from urllib.parse import urlencode
+except ImportError: # fallback to Python 2.x
+    from urllib import urlencode
 
 
 class IPAPassword(object):
@@ -39,7 +42,7 @@ class IPAPassword(object):
                 userData:
             raise ValueError(self.MSG_MISSING_KEYS)
 
-        return urllib.urlencode(userData)
+        return urlencode(userData)
 
     def changePassword(self, username, oldPassword, newPassword):
         userData = {
@@ -55,4 +58,4 @@ class IPAPassword(object):
 
         responseHeaders = response.headers
 
-        return responseHeaders['x-ipa-pwchange-result'] == 'ok'
+        return responseHeaders['x-ipa-pwchange-result'] == 'ok', response

@@ -1,6 +1,9 @@
-import urllib
-from Cookie import SimpleCookie
-from ipaResponse import IPAResponse
+try:
+    from urllib.parse import urlencode
+except ImportError: # fallback to Python 2.x
+    from urllib import urlencode
+from http.cookies import SimpleCookie
+from .ipaResponse import IPAResponse
 
 
 class IPAAuth(object):
@@ -36,7 +39,7 @@ class IPAAuth(object):
         if self.KEY_USER not in userData or self.KEY_PASSWORD not in userData:
             raise ValueError('Missing user/password key')
 
-        return urllib.urlencode(userData)
+        return urlencode(userData)
 
     def authenticate(self, username, password):
         """
